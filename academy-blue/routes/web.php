@@ -1,24 +1,16 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+/* ... comentarios ... */
 
+// 1. ESTA ES LA RUTA DE REDIRECCIÓN QUE YA TIENES
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('categories.index');
 });
 
-
-Route::resource('categories', App\Http\Controllers\CategoryController::class)->except('show');
+Route::resource('categories', CategoryController::class);
 
 Route::resource('courses', App\Http\Controllers\CourseController::class)->except('show');
 
