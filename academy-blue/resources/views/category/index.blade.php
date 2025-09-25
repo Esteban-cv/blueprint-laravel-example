@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="card">
-        {{-- Cabecera de la tarjeta con el botón de creación --}}
         <div class="card-header d-flex justify-content-end">
             <a href="{{ route('categories.create') }}" class="btn btn-primary">
                 <i class="fa fa-plus me-1"></i> Crear Nueva Categoría
@@ -12,10 +11,8 @@
         </div>
 
         <div class="card-body">
-            {{-- Incluir mensajes de éxito, error, etc. --}}
             @include('templates.messages')
 
-            {{-- Verificamos si hay categorías para mostrar --}}
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead class="table-light">
@@ -36,13 +33,11 @@
                                         <i class="nc-icon nc-zoom-split"></i>
                                     </a>
 
-                                    {{-- Botón de Editar --}}
                                     <a href="{{ route('categories.edit', $category->id) }}"
                                         class="btn btn-warning btn-fill btn-sm mr-2" title="Editar">
                                         <i class="nc-icon nc-tap-01"></i>
                                     </a>
 
-                                    {{-- Formulario para Eliminar (más seguro que un link) --}}
                                     <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
                                         class="d-inline"
                                         onsubmit="return confirm('¿Está seguro de que desea eliminar este registro?');">

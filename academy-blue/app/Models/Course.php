@@ -39,7 +39,7 @@ class Course extends Model
 
     public function instructor(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'instructor_id');
     }
 
     public function category(): BelongsTo

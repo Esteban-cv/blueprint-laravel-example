@@ -23,8 +23,18 @@ class CourseStoreRequest extends FormRequest
             'title' => ['required', 'string', 'max:200'],
             'description' => ['nullable', 'string'],
             'price' => ['required', 'integer'],
-            'instructor_id' => ['required', 'integer', 'exists:users.id,id'],
-            'category_id' => ['required', 'integer', 'exists:categories.id,id'],
+            'instructor_id' => ['required', 'integer', 'exists:users,id'],
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'description' => 'descripción',
+            'hours' => 'horas',
+            'technician_id' => 'técnico',
+            'type_activity_id' => 'tipo de actividad'
         ];
     }
 }

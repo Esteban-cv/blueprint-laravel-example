@@ -21,7 +21,7 @@
                     <p>Categorías</p>
                 </a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('courses.index') }}">
                     <i class="nc-icon nc-notes"></i>
                     <p>Cursos</p>
