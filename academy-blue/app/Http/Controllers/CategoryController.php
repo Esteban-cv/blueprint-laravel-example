@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-public function index()
+    public function index(Request $request): Response
     {
         $categories = Category::all();
 
@@ -17,36 +20,40 @@ public function index()
         ]);
     }
 
-public function create()
+    public function create(Request $request): Response
     {
         return view('category.create');
     }
 
-    public function store(CategoryStoreRequest $request)
+    public function store(CategoryStoreRequest $request): Response
     {
         $category = Category::create($request->validated());
-        session()->flash('success', 'Registro creado exitosamente');
+
+        $request->session()->flash('category.id', $category->id);
+
         return redirect()->route('categories.index');
     }
 
-    public function edit(Category $category)
+    public function edit(Request $request, Category $category): Response
     {
         return view('category.edit', [
             'category' => $category,
         ]);
     }
 
-    public function update(CategoryUpdateRequest $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category): Response
     {
         $category->update($request->validated());
-        session()->flash('success', 'Registro actualizado exitosamente');
+
+        $request->session()->flash('category.id', $category->id);
+
         return redirect()->route('categories.index');
     }
 
-    public function destroy(Category $category)
+    public function destroy(Request $request, Category $category): Response
     {
         $category->delete();
-        session()->flash('success', 'Registro eliminado exitosamente');
+
         return redirect()->route('categories.index');
     }
 }

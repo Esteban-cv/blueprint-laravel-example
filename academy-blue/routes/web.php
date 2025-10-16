@@ -24,3 +24,12 @@ Route::resource('lessons', LessonController::class)->except('show');
 
 // Define todas las rutas para el CRUD de Matrículas, excepto la vista de detalle.
 Route::resource('enrollments', EnrollmentController::class)->except('show');
+
+
+Route::resource('categories', App\Http\Controllers\CategoryController::class)->except('show');
+
+Route::resource('courses', App\Http\Controllers\CourseController::class)->except('show');
+
+Route::resource('lessons', App\Http\Controllers\LessonController::class)->except('show');
+
+Route::resource('enrollments', App\Http\Controllers\EnrollmentController::class)->except('show');

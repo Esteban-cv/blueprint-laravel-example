@@ -31,7 +31,7 @@
                             <td>{{ $course->title }}</td>
                             <td>{{ $course->instructor->name ?? 'N/A' }}</td>
                             <td>{{ $course->category->name ?? 'N/A' }}</td>
-                            <td>${{ number_format($course->price, 0, ',', '.') }}</td>
+                            <td>{{ number_format($course->price, 0, ',', '.') }}</td>
                             <td class="text-center">
                                 <a href="" class="btn btn-info btn-fill btn-sm mr-2" title="Ver"
                                    data-bs-toggle="modal" data-bs-target="#modalShow{{ $course->id }}">

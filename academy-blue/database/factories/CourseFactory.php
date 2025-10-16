@@ -25,7 +25,7 @@ class CourseFactory extends Factory
         return [
             'title' => fake()->sentence(4),
             'description' => fake()->text(),
-            'price' => fake()->numberBetween(1000, 100000),
+            'price' => fake()->numberBetween(-10000, 10000),
             'instructor_id' => User::factory(),
             'category_id' => Category::factory(),
         ];

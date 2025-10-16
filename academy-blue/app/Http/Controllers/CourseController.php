@@ -4,60 +4,56 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CourseStoreRequest;
 use App\Http\Requests\CourseUpdateRequest;
-use App\Models\Category;
 use App\Models\Course;
-use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Request $request): Response
     {
         $courses = Course::all();
+
         return view('course.index', [
             'courses' => $courses,
         ]);
     }
 
-    public function create()
+    public function create(Request $request): Response
     {
-        $users = User::where('role', 'instructor')->get();
-        $categories = Category::all();
-        return view('course.create', compact('users', 'categories'));
+        return view('course.create');
     }
 
-    public function store(CourseStoreRequest $request)
+    public function store(CourseStoreRequest $request): Response
     {
         $course = Course::create($request->validated());
-        session()->flash('success', 'Curso guardado exitosamente');
+
+        $request->session()->flash('course.id', $course->id);
 
         return redirect()->route('courses.index');
     }
 
-    public function edit(Course $course)
+    public function edit(Request $request, Course $course): Response
     {
-        $users = User::where('role', 'instructor')->get();
-        $categories = Category::all();
-
         return view('course.edit', [
             'course' => $course,
-            'users' => $users,
-            'categories' => $categories
         ]);
     }
 
-    public function update(CourseUpdateRequest $request, Course $course)
+    public function update(CourseUpdateRequest $request, Course $course): Response
     {
         $course->update($request->validated());
 
-        session()->flash('success', 'Curso actualizado exitosamente');
+        $request->session()->flash('course.id', $course->id);
 
         return redirect()->route('courses.index');
     }
 
-    public function destroy(Course $course)
+    public function destroy(Request $request, Course $course): Response
     {
         $course->delete();
-        session()->flash('success', 'Curso eliminado exitosamente');
+
         return redirect()->route('courses.index');
     }
 }
